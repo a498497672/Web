@@ -6,8 +6,8 @@
     <meta charset="utf-8" />
     <style>
         #map, #map2 {
-            width: 1200px;
-            height: 800px;
+            width: 1800px;
+            height: 950px;
             float: left;
             margin: 0 5px;
         }
@@ -40,9 +40,9 @@
             var obj = document.getElementById("map");
             map = new google.maps.Map(obj, option);
 
-            //map.addListener('bounds_changed', function () {
-            //    refreshMap();
-            //});
+            map.addListener('bounds_changed', function () {
+                refreshMap();
+            });
             map.addListener('click', function () {
                 closePreviousInfoBubble();
                 showCluster();
@@ -253,6 +253,6 @@
     </script>
 </head>
 <body>
-    <div id="map"></div>
+    <div class="map" id="map"></div>
 </body>
 </html>
