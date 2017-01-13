@@ -1,0 +1,258 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+        #map, #map2 {
+            width: 1200px;
+            height: 800px;
+            float: left;
+            margin: 0 5px;
+        }
+    </style>
+
+    <link href="../css/map.css" rel="stylesheet" />
+    <link href="../css/iconfont.css" rel="stylesheet" />
+    <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>-->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAer2sovu7Gw_7jVm9GTjt-ImX_gikEbkA&libraries=places&language=en-us"></script>
+    <script src="../lib/js-rich-marker-gh-pages/src/richmarker.js"></script>
+    <script src="../lib/js-marker-clusterer-gh-pages/src/markerclusterer.js"></script>
+    <script src="../lib/js-info-bubble-gh-pages/src/infobubble.js"></script>
+    <script>
+        var map, map2;
+        var markers = [];
+        var markerClusterer;
+        var openInfoBubble;
+        var selectBuildingId;
+        var clusterMarkers = [];
+        //var marker, marker2;
+        function init() {
+            var mapCenter = new google.maps.LatLng(51.5074, 0.1278);
+            var option = {
+                minZoom: 4,
+                maxZoom: 18,
+                zoom: 12,
+                center: mapCenter,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var obj = document.getElementById("map");
+            map = new google.maps.Map(obj, option);
+
+            //map.addListener('bounds_changed', function () {
+            //    refreshMap();
+            //});
+            map.addListener('click', function () {
+                closePreviousInfoBubble();
+                showCluster();
+            });
+            var style = [
+                { url: "../../images/markerCluster.png", height: 81, width: 58, anchor: [16, 0], textColor: '#ffffff', textSize: 18 },
+                { url: "../../images/markerCluster.png", height: 81, width: 58, anchor: [16, 0], textColor: '#ffffff', textSize: 16 },
+                { url: "../../images/markerCluster.png", height: 81, width: 58, anchor: [16, 0], textColor: '#ffffff', textSize: 14 }
+            ];
+
+            var imageUrl = '../../images/lease.png';
+            var imageUrl2 = '../../images/open.png';
+            var imageUrl3 = '../../images/lease_m.png';
+            var imageUrl4 = '../../images/noready.png';
+            var imageUrl5 = '../../images/lease_wo.png';
+            var imageUrl6 = '../../images/workorder.png';
+            var points = [{
+                id: 1,
+                latLng: new google.maps.LatLng(51.5074, 0.1278),
+                imageUrl: new google.maps.MarkerImage(imageUrl)
+            }, {
+                id: 2,
+                latLng: new google.maps.LatLng(51.5094, 0.1278),
+                imageUrl: new google.maps.MarkerImage(imageUrl2)
+            }, {
+                id: 3,
+                latLng: new google.maps.LatLng(51.5054, 0.1278),
+                imageUrl: new google.maps.MarkerImage(imageUrl3)
+            }, {
+                id: 4,
+                latLng: new google.maps.LatLng(51.5054, 0.1388),
+                imageUrl: new google.maps.MarkerImage(imageUrl4)
+            }, {
+                id: 5,
+                latLng: new google.maps.LatLng(51.5054, 0.1358),
+                imageUrl: new google.maps.MarkerImage(imageUrl5)
+            }, {
+                id: 6,
+                latLng: new google.maps.LatLng(51.5054, 0.1308),
+                imageUrl: new google.maps.MarkerImage(imageUrl6)
+            }];
+
+            var addMarker = function (building) {
+                var marker = new RichMarker({
+                    position: building.latLng,
+                    map: map,
+                    content: '<div class="marker">' + '<div><img src="' + building.imageUrl.url + '"/></div></div>',
+                    flat: true,
+                    building: building
+                });
+                google.maps.event.addListener(marker, 'click', function (event) {
+                    openPreviousInfoBubble(marker);
+                    //alert(marker.building.id);
+                    event.stopPropagation();
+                });
+                google.maps.event.addListener(marker, 'visible_changed', function () {
+                    if (marker.getVisible()) {
+                        markerClusterer.addMarker(marker, true);
+                        //markerClusterer.resetViewport();
+                    } else {
+                        markerClusterer.removeMarker(marker, true);
+                    }
+                });
+                markers.push(marker);
+            }
+
+            var addMarkers = function (buildings) {
+                for (var i = 0; i < points.length; i++) {
+                    addMarker(buildings[i]);
+                }
+                markerClusterer = new MarkerClusterer(map, markers, { styles: style });
+                //var bounds = new google.maps.LatLngBounds();
+                //for (j = 0; j < mapMarkers.length; j++) {
+                //    bounds.extend(mapMarkers.getPosition());
+                //}
+                //map.fitBounds(bounds);
+                google.maps.event.addListener(markerClusterer, 'clusterclick', function (cluster, event) {
+                    showCluster();
+                    map.setCenter(cluster.getCenter());
+                    if (map.getZoom() === 18) {
+                        google.maps.event.trigger(cluster.markers_[0], 'click', event);
+                        for (var it in cluster.markers_) {
+                            clusterMarkers.push(cluster.markers_[it]);
+                            cluster.markers_[it].setVisible(false);
+                        }
+                        markerClusterer.repaint();
+                    }
+                });
+            }
+
+            var showCluster = function () {
+                if (clusterMarkers !== []) {
+                    for (var it in clusterMarkers) {
+                        var selectedMarkers = getMarker(clusterMarkers[it].building.id);
+                        selectedMarkers.setVisible(true);
+                    }
+                    markerClusterer.repaint();
+                    clusterMarkers = [];
+                }
+            }
+
+            var refreshMarkers = function (buildings) {
+                clearMarkers();
+                addMarkers(buildings);
+                if (selectBuildingId > 0) {
+                    var marker = getMarker(selectBuildingId);
+                    marker.setVisible(false);
+                }
+                if (clusterMarkers !== []) {
+                    for (var it in clusterMarkers) {
+                        var selectedMarkers = getMarker(clusterMarkers[it].building.id);
+                        selectedMarkers.setVisible(false);
+                    }
+                    markerClusterer.repaint();
+                }
+            };
+
+            var refreshMap = function () {
+                var bounds = map.getBounds();
+                var southWestLat = bounds.getSouthWest().lat();
+                var southWestLng = bounds.getSouthWest().lng();
+                var centerLat = map.getCenter().lat();
+                var centerLng = map.getCenter().lng();
+                refreshMarkers(points);
+            };
+
+            var clearMarkers = function () {
+                if (markerClusterer) {
+                    markerClusterer.clearMarkers();
+                    markers = [];
+                }
+            };
+
+            var getMarker = function (id) {
+                for (var i = 0; i < markers.length; i++) {
+                    if (markers[i].building.id === Number(id)) {
+                        return markers[i];
+                    }
+                }
+                return null;
+            };
+
+            var openPreviousInfoBubble = function (marker) {
+                closePreviousInfoBubble();
+
+                var infoBubble = createInfoBubble(marker.building);
+                if (!infoBubble.isOpen()) {
+                    marker.setVisible(false);
+                    infoBubble.open(map, marker);
+                    openInfoBubble = infoBubble;
+                    selectBuildingId = marker.building.id;
+                }
+            };
+
+            var closePreviousInfoBubble = function () {
+                if (openInfoBubble) {
+                    openInfoBubble.close();
+                    if (selectBuildingId > 0) {
+                        var marker = getMarker(selectBuildingId);
+                        marker.setVisible(true);
+                        //markerClusterer.redraw();
+                        selectBuildingId = 0;
+                    }
+                }
+            };
+
+            var createInfoBubble = function (building) {
+                var content = populateInfoBubbleContent(building);
+                return new InfoBubble({
+                    map: map,
+                    content: content,
+                    shadowStyle: 0,
+                    padding: 0,
+                    backgroundColor: 'transparent',
+                    borderRadius: 0,
+                    borderWidth: 0,
+                    hideCloseButton: true
+                });
+            };
+
+            var populateInfoBubbleContent = function (building) {
+                var url = "../../../images/defulit_s.gif";
+                var infoHtml = '<div class="mapsed" id="infoBoxScope"><div style="height:70px"><a id="gotoBuildingEdit" href="/map/building/edit/' + building.id + '" onclick="goToUrlAngular(\'/map/building/edit/' + building.id + '\');return false;"><h3 title="building.name">building.name</h3></a><p>building.addressLine1 </p></div><div class="building-img">';
+                infoHtml = infoHtml + '<img src=' + url + ' class="img-responsive"></div><div class="map-btn-group">';
+
+                infoHtml = infoHtml + '<a class="lease-btn lease-close" title="Lease Ledger"><i class="iconfont icon-newleasedashboard"></i><div class=""></div></a>';
+                infoHtml = infoHtml + '<a class="lease-ledger lease-close" title="Lease Ledger"><i class="iconfont icon-ledgerdashboard"></i><div class=""></div></a>';
+                infoHtml = infoHtml + '<a title="Work Order" class="lease-wo lease-close" name="lease-wo"><i class="iconfont icon-workorderdashboard"></i><div class="flag"></div></a>';
+
+                infoHtml = infoHtml + '</div></div>';
+                return infoHtml;
+            }
+
+
+
+
+
+            addMarkers(points);
+            var bounds = new google.maps.LatLngBounds();
+            for (var j = 0; j < markers.length; j++) {
+                bounds.extend(markers[j].getPosition());
+            }
+            map.fitBounds(bounds);
+        }
+        //注册一个事件监听器,当页面完成加载
+        google.maps.event.addDomListener(window, 'load', init);
+        
+    </script>
+</head>
+<body>
+    <div id="map"></div>
+</body>
+</html>

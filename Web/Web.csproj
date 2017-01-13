@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{259837CB-0498-4D65-AD00-EAC7EB58532B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Web</RootNamespace>
+    <AssemblyName>Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.0.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.0.6\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.2.0\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.2.0\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.2.0\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.2.0\lib\net45\Microsoft.AI.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.2.0\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.2.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="css\iconfont.css" />
+    <Content Include="css\iconfont.svg" />
+    <Content Include="css\map.css" />
+    <Content Include="packages.config" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="lib\js-info-bubble-gh-pages\AUTHORS" />
+    <Content Include="lib\js-info-bubble-gh-pages\bower.json" />
+    <Content Include="lib\js-info-bubble-gh-pages\CONTRIBUTING.md" />
+    <Content Include="lib\js-info-bubble-gh-pages\CONTRIBUTORS" />
+    <Content Include="lib\js-info-bubble-gh-pages\LICENSE" />
+    <Content Include="lib\js-info-bubble-gh-pages\package.json" />
+    <Content Include="lib\js-info-bubble-gh-pages\README.md" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\AUTHORS" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\bower.json" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\CONTRIBUTING.md" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\CONTRIBUTORS" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\examples\data.json" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\LICENSE" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\package.json" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\README.md" />
+    <Content Include="lib\js-rich-marker-gh-pages\AUTHORS" />
+    <Content Include="lib\js-rich-marker-gh-pages\bower.json" />
+    <Content Include="lib\js-rich-marker-gh-pages\CONTRIBUTING.md" />
+    <Content Include="lib\js-rich-marker-gh-pages\CONTRIBUTORS" />
+    <Content Include="lib\js-rich-marker-gh-pages\LICENSE" />
+    <Content Include="lib\js-rich-marker-gh-pages\README.md" />
+    <Content Include="images\shuishuishui.webm" />
+    <Content Include="css\map.less" />
+    <Content Include="css\iconfont.eot" />
+    <Content Include="css\iconfont.ttf" />
+    <Content Include="css\iconfont.woff" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="images\artboard.jpg" />
+    <Content Include="images\avatar1.jpg" />
+    <Content Include="images\avatar2.jpg" />
+    <Content Include="images\avatar3.jpg" />
+    <Content Include="images\avatar4.jpg" />
+    <Content Include="images\avatar9.jpg" />
+    <Content Include="images\b1.jpg" />
+    <Content Include="images\b2.jpg" />
+    <Content Include="images\b3.jpg" />
+    <Content Include="images\b4.jpg" />
+    <Content Include="images\bg\1.jpg" />
+    <Content Include="images\bg\2.jpg" />
+    <Content Include="images\bg\3.jpg" />
+    <Content Include="images\bg\4.jpg" />
+    <Content Include="images\bg_tc_t.jpg" />
+    <Content Include="images\Bitmap Copy.png" />
+    <Content Include="images\Bitmap.png" />
+    <Content Include="images\Bitmap1 Copy.png" />
+    <Content Include="images\Bitmap1.png" />
+    <Content Include="images\blank.png" />
+    <Content Include="images\checkr.jpg" />
+    <Content Include="images\checkr_01.png" />
+    <Content Include="images\checkr_verifing.jpg" />
+    <Content Include="images\close.png" />
+    <Content Include="images\cloud_computing.jpg" />
+    <Content Include="images\dash.jpg" />
+    <Content Include="images\dashboard.png" />
+    <Content Include="images\defulit.gif" />
+    <Content Include="images\defulit_s.gif" />
+    <Content Include="images\electronic_signature.jpg" />
+    <Content Include="images\employment-info.png" />
+    <Content Include="images\error.png" />
+    <Content Include="images\experian.jpg" />
+    <Content Include="images\experian_1.png" />
+    <Content Include="images\experian_verifing.jpg" />
+    <Content Include="images\html5.jpg" />
+    <Content Include="images\ico\134-128.png" />
+    <Content Include="images\ico\air_conditioning_internal-128.png" />
+    <Content Include="images\ico\balcony-128.png" />
+    <Content Include="images\ico\dishwasher-128.png" />
+    <Content Include="images\ico\dryer-128.png" />
+    <Content Include="images\ico\Fireplace-128.png" />
+    <Content Include="images\ico\FitnessCenter-128.png" />
+    <Content Include="images\ico\Food_glass_drink-128.png" />
+    <Content Include="images\ico\GarbageDisposal-128.png" />
+    <Content Include="images\ico\IntercomSystem-128.png" />
+    <Content Include="images\ico\logo_2.png" />
+    <Content Include="images\ico\logo_one.png" />
+    <Content Include="images\ico\parking-128.png" />
+    <Content Include="images\ico\paw-print-128.png" />
+    <Content Include="images\ico\Pool-128.png" />
+    <Content Include="images\ico\refrigerator-128.png" />
+    <Content Include="images\ico\Satellite-128.png" />
+    <Content Include="images\ico\SecuritySystems-128.png" />
+    <Content Include="images\ico\Smoke-128.png" />
+    <Content Include="images\ico\tennis-128.png" />
+    <Content Include="images\ico\washer-dryer-128.png" />
+    <Content Include="images\img-example.jpg" />
+    <Content Include="images\lease.png" />
+    <Content Include="images\LeaseFailure.jpg" />
+    <Content Include="images\lease_m.png" />
+    <Content Include="images\lease_wo.png" />
+    <Content Include="images\load.gif" />
+    <Content Include="images\logo.png" />
+    <Content Include="images\logo1.png" />
+    <Content Include="images\logo_1.png" />
+    <Content Include="images\map-b-new.png" />
+    <Content Include="images\map-b.png" />
+    <Content Include="images\map-d-new.png" />
+    <Content Include="images\map-d.png" />
+    <Content Include="images\map-icon.png" />
+    <Content Include="images\map-s-new.png" />
+    <Content Include="images\map-s.png" />
+    <Content Include="images\map.png" />
+    <Content Include="images\map_bg.png" />
+    <Content Include="images\markerCluster.png" />
+    <Content Include="images\markerCluster_m.png" />
+    <Content Include="images\markerCluster_wo.png" />
+    <Content Include="images\menu-toggler.png" />
+    <Content Include="images\menu_sprite.svg" />
+    <Content Include="images\mobile_application.jpg" />
+    <Content Include="images\noimg.png" />
+    <Content Include="images\noready.png" />
+    <Content Include="images\one%402x.png" />
+    <Content Include="images\one%40mini.png" />
+    <Content Include="images\one.png" />
+    <Content Include="images\online_payment.jpg" />
+    <Content Include="images\open.png" />
+    <Content Include="images\pay.gif" />
+    <Content Include="images\pic_lost.gif" />
+    <Content Include="images\pin.png" />
+    <Content Include="images\pin_y.png" />
+    <Content Include="images\remove-icon-small.png" />
+    <Content Include="images\response_type.jpg" />
+    <Content Include="images\shuishuishui4.mp4" />
+    <Content Include="images\tabbar_bg.png" />
+    <Content Include="images\tab_bg.png" />
+    <Content Include="images\tab_bg_5.png" />
+    <Content Include="images\tips.gif" />
+    <Content Include="images\Upload.gif" />
+    <Content Include="images\upload_in_progress.gif" />
+    <Content Include="images\welcome.jpg" />
+    <Content Include="images\wo-map-b.png" />
+    <Content Include="images\wo-map-d.png" />
+    <Content Include="images\wo-map-m.png" />
+    <Content Include="images\wo-map-s.png" />
+    <Content Include="images\workorder.png" />
+    <Content Include="lib\js-info-bubble-gh-pages\examples\example.html" />
+    <Content Include="lib\js-info-bubble-gh-pages\images\arrow.png" />
+    <Content Include="lib\js-info-bubble-gh-pages\screenshot.png" />
+    <Content Include="lib\js-info-bubble-gh-pages\src\infobubble-compiled.js" />
+    <Content Include="lib\js-info-bubble-gh-pages\src\infobubble.js" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\docs\examples.html" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\docs\reference.html" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\examples\advanced_example.html" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\examples\simple_example.html" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\examples\speed_test.js" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\examples\speed_test_example.html" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\conv30.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\conv40.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\conv50.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\heart30.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\heart40.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\heart50.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\m1.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\m2.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\m3.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\m4.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\m5.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\people35.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\people45.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\people55.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\images\pin.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\screenshot.png" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\src\markerclusterer.js" />
+    <Content Include="lib\js-marker-clusterer-gh-pages\src\markerclusterer_compiled.js" />
+    <Content Include="lib\js-rich-marker-gh-pages\examples\richmarker.html" />
+    <Content Include="lib\js-rich-marker-gh-pages\reference.html" />
+    <Content Include="lib\js-rich-marker-gh-pages\screenshot.jpg" />
+    <Content Include="lib\js-rich-marker-gh-pages\src\richmarker-compiled.js" />
+    <Content Include="lib\js-rich-marker-gh-pages\src\richmarker.js" />
+    <Content Include="page\map - 复制.html" />
+    <Content Include="page\map.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>5619</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:5619/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
